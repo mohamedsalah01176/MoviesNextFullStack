@@ -1,0 +1,20 @@
+export const inputregister=[
+    {
+        name:"name",
+        type:"text",
+        placeholder:"name:",
+        animation:"fede-rigth"
+    },
+    {
+        name:"email",
+        type:"email",
+        placeholder:"email:",
+        animation:"fede-left"
+    },
+    {
+        name:"password",
+        type:"password",
+        placeholder:"password:",
+        animation:"fede-rigth"
+    },
+]

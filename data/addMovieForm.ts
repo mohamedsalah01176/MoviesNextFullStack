@@ -1,0 +1,26 @@
+export const inputFormAddMovie=[
+    {
+        name:"title",
+        placeholder:"Title:",
+        type:"text",
+        animation:"fede-left"
+    },
+    {
+        name:"original_language",
+        placeholder:"Language:",
+        type:"text",
+        animation:"fede-right"
+    },
+    {
+        name:"poster_path",
+        placeholder:"Image:",
+        type:"text",
+        animation:"fede-left"
+    },
+    {
+        name:"rate",
+        placeholder:"Rate:",
+        type:"number",
+        animation:"fede-right"
+    },
+]
