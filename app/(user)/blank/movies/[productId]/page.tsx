@@ -1,45 +1,58 @@
+"use client"
 import Image from "next/image";
-
-
-
-import type { Metadata } from 'next'
+// import type { Metadata } from 'next'
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
  
-type Props = {
-  params: Promise<{ productId: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+// type Props = {
+//   params: Promise<{ productId: string }>
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+// }
  
-export async function generateMetadata(
-  { params }: Props,
-//   parent: ResolvingMetadata
-): Promise<Metadata> {
-  const id = (await params).productId
-  // fetch post information
-   const {title,overview,images} = await (await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9813ce01a72ca1bd2ae25f091898b1c7`)).json()
-  return {
-    title: title ,
-    description: overview || 'Detailed view of the movie.',
-    openGraph:{
-      images:images
-    }
-  }
-}
+// export async function generateMetadata(
+//   { params }: Props,
+// //   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const id = (await params).productId
+//   // fetch post information
+//    const {title,overview,images} = await (await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9813ce01a72ca1bd2ae25f091898b1c7`)).json()
+//   return {
+//     title: title ,
+//     description: overview || 'Detailed view of the movie.',
+//     openGraph:{
+//       images:images
+//     }
+//   }
+// }
 
 
 
 
+type Movie = {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  runtime:number;
+  homepage:string;
+  vote_count:number;
+  genres?: { id: number; name: string }[]
+};
+  
+const Page = () => {
+  const [movie,setMovie]=useState<Movie>()
+  const {productId}=useParams()
+  useEffect(()=>{
+    (async()=>{
+        const results =await(await fetch(`https://api.themoviedb.org/3/movie/${productId}?api_key=9813ce01a72ca1bd2ae25f091898b1c7`,{
+        cache: 'no-store'
+      })).json();
+      setMovie(results)
+    })()
+  },[])
 
-const GetMovies= async(id:string)=>{
-    const data=await(await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9813ce01a72ca1bd2ae25f091898b1c7`)).json()
-            console.log(data);
-            return data
-  }
-const Page = async({params}:{params:{productId:string}}) => {
-  const data = await params; 
-  const productId = data.productId; 
-  const movie=await GetMovies(productId);
   return (
-    <div className="flex justify-center items-center min-h-[95vh] pt-10 text-white w-[90%] m-auto">
+    <div className="flex justify-center items-center min-h-[95vh] pt-20 text-white w-[90%] m-auto">
         <div className="flex items-center justify-center gap-10 flex-col md:flex-row ">
             <Image width={500} height={600} src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`} alt="movies" className="h-[600px] md:rounded-br-full rounded-none fede-left" />
             <div className="fede-rigth">
@@ -48,7 +61,7 @@ const Page = async({params}:{params:{productId:string}}) => {
                 <div className="my-4 fede-rigth">
                     <h2 className="mb-2">Categories:</h2>
                     <div className="flex gap-2">
-                        {movie?.genres.map((item:{name:string,id:number})=>{
+                        {movie?.genres?.map((item:{name:string,id:number})=>{
                             return(
                                 <div key={item.id} className="border border-[#9d2735]  py-1 px-2 bg-[#9d2735] rounded-xl transition-all duration-300 hover:bg-[#161a1e] hover:text-[#9d2735] ">{item.name}</div>
                             )
@@ -57,7 +70,11 @@ const Page = async({params}:{params:{productId:string}}) => {
                 </div>
                 <div className="flex justify-around fade-in-down">
                     <div>
-                        <span className="text-lg">Time</span>: <span className="text-gray-400"> {(movie?.runtime /60).toFixed(2) } Hours</span>
+                      {movie?.runtime !== undefined ? (
+                        <span className="text-gray-400"> {(movie.runtime / 60).toFixed(2)} Hours</span>
+                      ) : (
+                        <span className="text-gray-400">N/A</span>
+                      )}
                     </div>
                     <div className="mb-8"><span className="text-lg">Votes</span>: <span className="text-gray-400">{movie?.vote_count}</span></div>
                 </div>

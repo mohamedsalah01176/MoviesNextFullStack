@@ -14,8 +14,8 @@ interface props{
 const Movie = ({movie,handleDelete,showForm}:props)=>{
     const [role,setRole]=useState()
     useEffect(()=>{
-        const {role}=JSON.parse(localStorage.getItem("user") as string)
-        setRole(role)
+        const user=JSON.parse(localStorage.getItem("user") as string)
+        setRole(user?.role)
     },[])
     return(
         <>

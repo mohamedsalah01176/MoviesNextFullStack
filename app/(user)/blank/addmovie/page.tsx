@@ -15,8 +15,8 @@ type IAction={
 const Page =() => {
   const [role,setRole]=useState()
   useEffect(()=>{
-      const {role}=JSON.parse(localStorage.getItem("user") as string)
-      setRole(role)
+      const user=JSON.parse(localStorage.getItem("user") as string)
+      setRole(user?.role)
   },[])
   const navigate=useRouter()
     const initState={

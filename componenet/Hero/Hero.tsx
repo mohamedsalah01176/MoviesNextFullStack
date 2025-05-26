@@ -1,14 +1,11 @@
+"use client"
 import Image from 'next/image'
 import { MdOutlineSlowMotionVideo } from 'react-icons/md'
 import SliderImage from '../SliderImage/SliderImage'
 
-const getMovies=async()=>{
-    const results=await(await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/movies`,{next:{revalidate:60*60}})).json();
-    return results;
-}
 
-const Hero = async() => {
-    const movies=await getMovies()
+
+const Hero = ({movies}:{movies:[]}) => {
   return (
     <div className=" min-h-[115vh] relative overflow-hidden ">
         
