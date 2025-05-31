@@ -1,3 +1,38 @@
+# 🎬 Movies Web App
+
+A sleek and responsive **Next.js** application to **browse, search, and explore movies**. It integrates with a public movie API to provide detailed information and an enjoyable user experience.
+
+---
+
+## ✨ Features
+
+- Browse popular and trending movies  
+- Search movies by title instantly  
+- View detailed movie info: synopsis, cast, ratings, trailers  
+- Responsive UI for desktop and mobile  
+- Fast page loads with Next.js server-side rendering (SSR)  
+
+---
+
+## 🛠 Technologies Used
+
+| Technology     | Purpose                          |
+| -------------- | --------------------------------|
+| Next.js        | React framework with SSR         |
+| React          | UI components                   |
+| CSS Modules / Tailwind CSS | Styling and responsive design |
+| Axios / Fetch  | API requests                    |
+| TMDb API (or other) | Movie data provider          |
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/yourusername/movies-web-app.git
+   cd movies-web-app
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
